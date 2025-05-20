@@ -149,7 +149,7 @@ while True:
             # resize everything to 224×224 for panel
             R = cv.resize(ROI, (224, 224))
             D = cv.resize(dr_color, (224, 224))
-            C = cv.resize(cm_color, (224, 224))
+            C = cm_color
 
             # add titles
             cv.putText(R, "ROI", (5, 20), cv.FONT_HERSHEY_SIMPLEX, 0.6, (255,255,0), 2)
@@ -157,11 +157,10 @@ while True:
             cv.putText(C, f"Closest: {closest_label}", (5, 20), cv.FONT_HERSHEY_SIMPLEX, 0.6, (255,150,0), 2)
 
             panel = np.hstack([R, D, C])
-            depth_panel_padded = cv.copyMakeBorder(
-                panel, 128, 128, 0, 0, cv.BORDER_CONSTANT, value=(0,0,0)
+            depth_panel_padded = cv.copyMakeBorder(panel, 128, 128, 0, 0, cv.BORDER_CONSTANT, value=(0,0,0)
             )
 
-    # ── Always display combined view ───────────────────────────────────────────
+    # ── Always display combined view 
     # FPS overlay
     now = time.time()
     fps = 1/(now - previous_time)
